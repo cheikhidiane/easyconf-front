@@ -1,0 +1,164 @@
+<div class="flex items-center justify-center">
+  <div class="flex-1 flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+        Créer un compte
+      </h2>
+    </div>
+
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <form class="space-y-6" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="email" class="block text-sm/6 font-medium text-gray-900">Prénom</label>
+          <div class="mt-2">
+            <input
+              id="first-name"
+              type="text"
+              name="first-name"
+              formControlName="firstName"
+              required
+              autocomplete="off"
+              class="block w-full rounded-xs bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            />
+            @if (isInvalidTouchedOrDirty(registerForm.controls.firstName)) {
+            <small class="text-red-500 font-medium">
+              @if(registerForm.controls.firstName.hasError('required')) {
+              <ng-container> Le champs est obligatoire. </ng-container>
+              } @else if (registerForm.controls.firstName.hasError('minLength')) {
+              <ng-container> 3 caractères minimum. </ng-container>
+              }
+            </small>
+            }
+          </div>
+        </div>
+        <div>
+          <label for="email" class="block text-sm/6 font-medium text-gray-900">Nom</label>
+          <div class="mt-2">
+            <input
+              id="last-name"
+              type="text"
+              name="last-name"
+              formControlName="lastName"
+              required
+              autocomplete="off"
+              class="block w-full rounded-xs bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            />
+            @if (isInvalidTouchedOrDirty(registerForm.controls.lastName)) {
+            <small class="text-red-500 font-medium">
+              @if(registerForm.controls.lastName.hasError('required')) {
+              <ng-container> Le champs est obligatoire. </ng-container>
+              } @else if (registerForm.controls.lastName.hasError('minLength')) {
+              <ng-container> 3 caractères minimum. </ng-container>
+              }
+            </small>
+            }
+          </div>
+        </div>
+        <div>
+          <label for="email" class="block text-sm/6 font-medium text-gray-900">Email</label>
+          <div class="mt-2">
+            <input
+              id="email"
+              type="email"
+              name="email"
+              formControlName="email"
+              required
+              autocomplete="email"
+              [class.is-invalid]="isInvalidTouchedOrDirty(registerForm.controls.email)"
+              class="block w-full rounded-xs bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            />
+            @if (isInvalidTouchedOrDirty(registerForm.controls.email)) {
+            <small class="text-red-500 font-medium">
+              @if(registerForm.controls.email.hasError('required')) {
+              <ng-container> Le champs est obligatoire. </ng-container>
+              } @else if (registerForm.controls.email.hasError('email')) {
+              <ng-container> Entrer un email valide. </ng-container>
+              }
+            </small>
+            }
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center justify-between">
+            <label for="password" class="block text-sm/6 font-medium text-gray-900"
+              >Mot de passe</label
+            >
+          </div>
+          <div class="mt-2">
+            <input
+              id="password"
+              type="password"
+              name="password"
+              formControlName="password"
+              required
+              autocomplete="off"
+              class="block w-full rounded-xs bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            />
+            @if (isInvalidTouchedOrDirty(registerForm.controls.password)) {
+            <small class="text-red-500 font-medium">
+              @if(registerForm.controls.password.hasError('required')) {
+              <ng-container> Le champs est obligatoire. </ng-container>
+              } @else if (registerForm.controls.password.hasError('pattern')) {
+              <ng-container>
+                8 caractères minimum avec majuscule, minuscule, chiffre et caractère spécial.
+              </ng-container>
+              }
+            </small>
+            }
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center justify-between">
+            <label for="password" class="block text-sm/6 font-medium text-gray-900"
+              >Confirmer le mot de passe</label
+            >
+          </div>
+          <div class="mt-2">
+            <input
+              id="confirm-password"
+              type="password"
+              name="confirm-password"
+              formControlName="confirmPassword"
+              required
+              autocomplete="current-password"
+              class="block w-full rounded-xs bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            />
+            @if (isInvalidTouchedOrDirty(registerForm.controls.confirmPassword)) {
+            <small class="text-red-500 font-medium">
+              @if(registerForm.controls.confirmPassword.hasError('required')) {
+              <ng-container> Le champs est obligatoire. </ng-container>
+              } @else if (registerForm.controls.confirmPassword.hasError('mismatch')) {
+              <ng-container> Les mots de passe ne correspondents pas. </ng-container>
+              }
+            </small>
+            }
+          </div>
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            class="flex w-full justify-center rounded-xs bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            S'inscrire
+          </button>
+        </div>
+      </form>
+
+      <p class="mt-10 text-center text-sm/6 text-gray-500">
+        Vous avez déjà un compte?
+        <a
+          [routerLink]="['/login']"
+          class="font-semibold text-indigo-600 hover:text-indigo-500 px-1"
+          >Se connecter</a
+        >
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="flex-1 justify-center items-center bg-indigo-500 min-h-screen h-full w-full hidden md:flex"
+  >
+    <img class="max-w-[70%]" src="logo.png" alt="Logo" />
+  </div>
+</div>
